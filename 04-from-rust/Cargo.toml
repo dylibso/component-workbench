@@ -1,0 +1,21 @@
+[package]
+name = "from-rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cargo-component-bindings = { git = "https://github.com/bytecodealliance/cargo-component" }
+wee_alloc = "0.4.5"
+
+[lib]
+crate-type = ["cdylib"]
+
+[package.metadata.component]
+package = "component:from-rust"
+
+[package.metadata.component.target]
+path = "wit"
+
+[package.metadata.component.dependencies]

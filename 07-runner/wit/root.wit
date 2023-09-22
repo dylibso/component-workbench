@@ -1,0 +1,5 @@
+package root:component
+
+world root {
+  export hello-world: func() -> string
+}
