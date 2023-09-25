@@ -1,0 +1,9 @@
+[workspace]
+members=["*-runner"]
+exclude = ["04-from-rust", "08-count_vowels", "09-wit-parser"]
+resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1.0.75"
+wasmtime = { version = "13.0.0", features = ["component-model"] }
+

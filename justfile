@@ -6,7 +6,10 @@ _help:
 clean:
   rm -rf build
 
-build:
+_build_cargo:
+  @cargo build --workspace --release --quiet
+
+build: _build_cargo
   #!/bin/bash
   mkdir -p build/
   for file in $(find . -name '*.wat' | sort); do
@@ -16,6 +19,9 @@ build:
       wasm-tools parse $file -o $target
     fi
   done
+
+run which='02': build
+  @cargo run --quiet --release --bin $(cargo metadata --format-version=1 | jq --arg which {{which}} -r '.workspace_members[] | select(contains($which))' | awk '{print $1}')
 
 set export
 wasmtime *args:
