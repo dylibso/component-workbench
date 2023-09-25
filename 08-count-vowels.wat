@@ -1,3 +1,15 @@
+(;
+Instead of returning a string, now I'm trying to import a string -- and what
+better way to test this than to count the number of vowels in the string?
+
+Note that we have to export the memory *and* provide a `realloc` function pointer
+to the `canon lift` line. Of course, in this case, our `realloc` implementation is
+a lie -- we just grow the memory by a single page no matter what -- but that's sufficient
+to run the program.
+
+Speaking of running the program, you can run this with `just 08`. Change the string in `08-runner/src/main.rs`
+to test different results! See what happens if you _don't_ export the memory!
+;)
 (component $count_vowels
     (core module $make_counter
         (memory $memory 64)
@@ -11,6 +23,8 @@
               (loop $count_loop
                 (if (i32.eq (local.get $i) (local.get $size)) (then br $out_of_loop))
 
+		(; I am happy I got to do some bit-twiddling here. Unset the fifth bit
+		   of the incoming char in order to upper case ASCII: 'a' -> 'A'. ;)
                 (local.set $chara
                     (i32.and
                       (i32.load8_u (i32.add (local.get $ptr) (local.get $i)))
@@ -31,6 +45,12 @@
                 )
 
                 (local.set $i (i32.add (i32.const 1) (local.get $i)))
+
+	        (; Note that "loop" doesn't actually _loop_ by itself. It just represents
+	           a block; if you branch (`br`) to a loop block you enter at the start of
+		   the block; if you branch to a plain block you enter at the end of the block.
+
+		   This took me COUGHCOUGHCOUGH minutes to figure out. ;)
                 br $count_loop
               )
             )
@@ -39,6 +59,7 @@
         )
 
         (func $realloc (param i32 i32 i32 i32) (result i32)
+	    (; "65KiB ought to be enough for anybody" -- bill gates, probably ;)
             i32.const 1
             memory.grow
         )
@@ -55,6 +76,7 @@
 
     (type $t-count-vowels (func (param "input" string) (result u32)))
 
-    (func $c-count-vowels (type $t-count-vowels) (canon lift (core func $core-counter) (memory $memory) (realloc $realloc) string-encoding=utf8))
+    (func $c-count-vowels (type $t-count-vowels)
+    	(canon lift (core func $core-counter) (memory $memory) (realloc $realloc) string-encoding=utf8))
     (export "count-vowels" (func $c-count-vowels))
 )

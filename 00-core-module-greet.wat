@@ -1,3 +1,9 @@
+(;
+This is a transliteration of the "hello from WAT" example 
+from Kyle Brown's "Wasm Components for Every Language" [1] talk.
+
+[1]: https://www.youtube.com/watch?v=IqehHuPYUSc&t=12s
+;)
 (component
   (core module $m
     (memory $memory (export "mem")
