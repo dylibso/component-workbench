@@ -1,4 +1,4 @@
-use std::{borrow::Borrow, path::PathBuf};
+use std::path::PathBuf;
 
 use anyhow::Result;
 use wasmtime::{
@@ -16,7 +16,7 @@ fn main() -> Result<()> {
     let target: PathBuf = args
         .get(1)
         .map(String::as_str)
-        .unwrap_or_else(|| "banana-wasi.wasm")
+        .unwrap_or_else(|| "build/02-component-instantiate.wasm")
         .into();
 
     if !target.as_path().is_file() {

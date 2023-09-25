@@ -16,7 +16,7 @@ fn main() -> Result<()> {
     let target: PathBuf = args
         .get(1)
         .map(String::as_str)
-        .unwrap_or_else(|| "build/07-component-instantiate-string.wasm")
+        .unwrap_or_else(|| "build/08-count-vowels.wasm")
         .into();
 
     if !target.as_path().is_file() {
@@ -43,7 +43,7 @@ fn main() -> Result<()> {
 
     let (instance, _instance) = Root::instantiate(&mut store, &component, &linker)?;
 
-    let res = instance.call_hello_world(store)?;
+    let res = instance.call_count_vowels(store, "It's a nice day. wow!")?;
 
     println!("{}", res);
     Ok(())
