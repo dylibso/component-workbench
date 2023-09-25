@@ -1,3 +1,8 @@
+(;
+Building on `./02-component-instantiate.wat`, in this file I'm manually walking
+the steps to return a *string* instead of a *u32* pointer. Note that we have to
+export the memory and refer to it in the `canon lift` line below.
+;)
 (component $greet
     (core module $make_greeter
         (memory $memory (export "mem")
@@ -12,9 +17,9 @@
     (alias core export $greeter "greet" (core func $greeter-fn))
     (alias core export $greeter "mem" (core memory $mem))
 
-    (type $component-ret-u32 (func (result string)))
+    (type $component-ret-str (func (result string)))
     (func $canon-greeter-fn
-      (type $component-ret-u32)
+      (type $component-ret-str)
       (canon lift (core func $greeter-fn) (memory $mem)))
     (export "hello-world" (func $canon-greeter-fn))
 )

@@ -1,3 +1,25 @@
+(;
+Playing with instantiating & exporting a component (vs. instantiating a module
+and exporting canon functions.) Check out the difference in the wit:
+
+```
+$ just build && wasm-tools component wit build/02-component-instantiate.wasm
+package root:component
+
+world root {
+  export hello-world: func() -> u32
+}
+
+$ just build && wasm-tools component wit build/06-instantiate-component-and-export.wasm
+package root:component
+
+world root {
+  export ok: interface {
+    hello-world: func() -> u32
+  }
+}
+```
+;)
 (component
   (component $greet
       (core module $make_greeter

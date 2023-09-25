@@ -1,3 +1,6 @@
+(;
+An example of linking two component instances, written for a presentation.
+;)
 (component
   (component $tonight-show
       (core module $number-mystery
