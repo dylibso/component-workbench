@@ -5,6 +5,7 @@ _help:
 
 clean:
   rm -rf build
+  cargo clean
 
 _build_cargo:
   @cargo build --workspace --release --quiet

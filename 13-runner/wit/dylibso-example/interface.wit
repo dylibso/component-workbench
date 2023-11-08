@@ -1,0 +1,5 @@
+package dylibso:example
+
+interface api {
+  say-hello: func(input: string) -> u32
+}
