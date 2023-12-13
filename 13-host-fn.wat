@@ -12,8 +12,8 @@ four steps:
 
 I reverse-engineered this pattern from the output of `cargo component build`,
 where it was obfuscated by repetition. (Each imported interface creates its own
-trampoline, and it's very difficult to get cargo-component *not* to import a
-bunch of WASI interfaces.)
+trampoline, and I found it difficult to tell cargo-component *not* to import the
+WASI interfaces.)
 
 I've annotated the component with explanatory comments as best I can; there's an associated
 runner so you can `just run 13` to see the output.
