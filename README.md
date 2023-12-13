@@ -13,3 +13,7 @@ Install [`just`](https://just.systems) and `wasm-tools`.
 - `just run`: Some WAT files have an associated runner -- e.g.,
   `02-component-instantiate.wat` has an associated `02-runner`. Run these
   examples using `just run 02`, `just run 07`, etc.
+
+## License
+
+BSD-3-Clause
