@@ -1,5 +1,5 @@
-package component:count-vowels
+package component:count-vowels;
 
 world example {
-    export count-vowels: func(input: string) -> u32
+    export count-vowels: func(input: string) -> u32;
 }

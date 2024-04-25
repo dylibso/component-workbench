@@ -5,5 +5,5 @@ resolver = "2"
 
 [workspace.dependencies]
 anyhow = "1.0.75"
-wasmtime = { version = "14.0.0", features = ["component-model"] }
+wasmtime = { version = "20.0.0", features = ["component-model"] }
 

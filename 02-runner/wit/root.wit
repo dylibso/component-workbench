@@ -1,6 +1,6 @@
-package root:component
+package root:component;
 
 world root {
-  export hello-world: func() -> u32
+  export hello-world: func() -> u32;
 }
 
